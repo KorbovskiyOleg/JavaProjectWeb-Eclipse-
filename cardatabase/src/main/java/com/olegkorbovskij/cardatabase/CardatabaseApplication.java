@@ -35,11 +35,18 @@ public class CardatabaseApplication implements CommandLineRunner{
 		            "Silver", 
 		            "KKO-0212", 2020, 39000));
 		 repository.save(new Car("Ford","Mustang","Black","AMB-3222",2024,100000));
-		 repository.findByBrandAndModel("Ford", "Mustang");
+		 
+		
+		 
 		 
 		 for (Car car : repository.findAll()) {
 	           logger.info(car.getBrand() + " " + car
 	               .getModel());
+	       }
+		 
+		 
+		 for (Car car : repository.findByBrandAndModel("Ford", "Mustang")) {
+	           logger.info(car.getBrand() + " " + car.getModel()+ " "+ car.getId());
 	       }
 		//repository.deleteAll();
 		
