@@ -10,7 +10,7 @@ public class Owner {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long ownerId;
 	private String firstName;
 	private String lastName;
 	
@@ -22,12 +22,12 @@ public class Owner {
 		this.lastName = lastName;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getOwnerId() {
+		return ownerId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setOwnerId(Long ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	public String getFirstName() {
@@ -45,6 +45,7 @@ public class Owner {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	
 	
 
