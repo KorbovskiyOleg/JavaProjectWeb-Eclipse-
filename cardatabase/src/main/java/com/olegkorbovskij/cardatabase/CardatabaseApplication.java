@@ -39,5 +39,6 @@ public class CardatabaseApplication implements CommandLineRunner{
 	           logger.info(car.getBrand() + " " + car
 	               .getModel());
 	       }
+		repository.deleteAll();
 	}
 }
