@@ -11,25 +11,25 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Owner {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long ownerId;
 	private String firstName;
 	private String lastName;
-	
-	public Owner() {}
+
+	public Owner() {
+	}
 
 	public Owner(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="owner")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private List<Car> cars;
 
-	
 	public List<Car> getCars() {
 		return cars;
 	}
@@ -37,8 +37,6 @@ public class Owner {
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
-	
-	
 
 	public Long getOwnerId() {
 		return ownerId;
@@ -63,8 +61,5 @@ public class Owner {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	
-	
 
 }
