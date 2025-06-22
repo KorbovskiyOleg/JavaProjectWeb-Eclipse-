@@ -23,7 +23,7 @@ public class Car {
 	 	public Car() {}
 
 
-		public Car(String brand, String model, String color, String registerNumber, int yearOfCar, int price) {
+		/*public Car(String brand, String model, String color, String registerNumber, int yearOfCar, int price) {
 			super();
 			this.brand = brand;
 			this.model = model;
@@ -31,13 +31,26 @@ public class Car {
 			this.registerNumber = registerNumber;
 			this.yearOfCar = yearOfCar;
 			this.price = price;
-		}
+		}*/
+	 	
+	 	
 		
 		@ManyToOne(fetch=FetchType.LAZY)
 		@JoinColumn(name="owner")
 		private Owner owner;
 		
 		
+		public Car(String brand, String model, String color, String registerNumber, int yearOfCar, int price,
+				Owner owner) {
+			super();
+			this.brand = brand;
+			this.model = model;
+			this.color = color;
+			this.registerNumber = registerNumber;
+			this.yearOfCar = yearOfCar;
+			this.price = price;
+			this.owner = owner;
+		}
 
 
 		public Owner getOwner() {
@@ -50,6 +63,7 @@ public class Car {
 		}
 
 
+		
 		public long getId() {
 			return id;
 		}
