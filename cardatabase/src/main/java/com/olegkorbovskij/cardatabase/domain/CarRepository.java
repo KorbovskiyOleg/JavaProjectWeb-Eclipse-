@@ -13,7 +13,7 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	List<Car> findByBrand(@Param("brand")String brand);
 
 	// Получить авто по бредну и цвету
-	List<Car> findByBrandAndModel(String brand, String model);
+	List<Car> findByBrandAndModel(@Param("brand")String brand, @Param("model") String model);
 	
 	List<Car> findByColor(@Param("color") String color);
 
