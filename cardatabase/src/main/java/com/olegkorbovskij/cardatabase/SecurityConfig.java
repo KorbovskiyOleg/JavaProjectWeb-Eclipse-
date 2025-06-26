@@ -8,8 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import com.olegkorbovskij.cardatabase.service.UserDetailsServiceImpl;
 
-import service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -23,10 +23,10 @@ public class SecurityConfig {
 	}
 
 	@Autowired
-	private UserDetailsServiceImpl userDetailService;
+	private UserDetailsServiceImpl userDetailsService;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 }

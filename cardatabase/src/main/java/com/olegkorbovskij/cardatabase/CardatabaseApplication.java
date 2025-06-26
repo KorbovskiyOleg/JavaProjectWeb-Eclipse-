@@ -13,6 +13,8 @@ import com.olegkorbovskij.cardatabase.domain.Car;
 import com.olegkorbovskij.cardatabase.domain.CarRepository;
 import com.olegkorbovskij.cardatabase.domain.Owner;
 import com.olegkorbovskij.cardatabase.domain.OwnerRepository;
+import com.olegkorbovskij.cardatabase.domain.User;
+import com.olegkorbovskij.cardatabase.domain.UserRepository;
 
 @SpringBootApplication
 public class CardatabaseApplication implements CommandLineRunner {
@@ -24,6 +26,9 @@ public class CardatabaseApplication implements CommandLineRunner {
 
 	@Autowired
 	private OwnerRepository orepository;
+
+	@Autowired
+	private UserRepository urepository;
 
 	public static void main(String[] args) {
 		// This is comment a important
@@ -52,5 +57,13 @@ public class CardatabaseApplication implements CommandLineRunner {
 		}
 		// repository.deleteAll();
 
+		// User 1(Username: user, password: user)
+		// User 2(Username: admin, password: admin)
+		urepository.save(new User("user","$2a$10$coMRhe6ht2zOX8ZDUb0nke9j2Gt9muAm3lQW09CJL7PCAdW59.P1C","USER"));
+		urepository.save(new User("admin","$2a$10$wPej0wdhkDXuwLGozgeAwedByqfWV595NU95cpb3y/sNCXUrLul3W","ADMIN"));
+		
+		
+		
 	}
+
 }
