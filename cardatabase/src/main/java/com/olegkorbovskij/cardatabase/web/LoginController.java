@@ -2,7 +2,6 @@ package com.olegkorbovskij.cardatabase.web;
 
 import com.olegkorbovskij.cardatabase.domain.AccountCredentials;
 import com.olegkorbovskij.cardatabase.service.JwtService;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

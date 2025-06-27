@@ -33,7 +33,7 @@ public class JwtService {
 
     //Получите токен из заголовка авторизации запроса,
     // проверьте токен и получите имя пользователя
-    String getAuthUser(HttpServletRequest request){
+    public String getAuthUser(HttpServletRequest request){
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if(token !=null){
