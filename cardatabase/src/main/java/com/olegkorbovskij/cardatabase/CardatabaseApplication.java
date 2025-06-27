@@ -36,6 +36,7 @@ public class CardatabaseApplication implements CommandLineRunner {
 		logger.info("Application started");
 	}
 
+	
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -59,8 +60,8 @@ public class CardatabaseApplication implements CommandLineRunner {
 
 		// User 1(Username: user, password: user)
 		// User 2(Username: admin, password: admin)
-		urepository.save(new User("user","$2a$10$coMRhe6ht2zOX8ZDUb0nke9j2Gt9muAm3lQW09CJL7PCAdW59.P1C","USER"));
-		urepository.save(new User("admin","$2a$10$wPej0wdhkDXuwLGozgeAwedByqfWV595NU95cpb3y/sNCXUrLul3W","ADMIN"));
+		urepository.save(new User("user","$2a$10$0mbQIzQXksZT4tkHzI4rw.0BPb13Twv.Wz8cxdwFHOhBW5IGA/PRm","USER"));
+		urepository.save(new User("admin","$2a$10$WpsiX7s69eKqk27egKuEluohHzMA88bc5jtTP8278OjqS4q.RmCAi","ADMIN"));
 		
 		
 		
