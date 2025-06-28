@@ -56,7 +56,8 @@ public class CardatabaseApplication implements CommandLineRunner {
 			logger.info(car.getBrand() + " " + car.getModel() + " " + car.getId());
 		}
 
-		// проверка слияния 2
+
+		//проверка слияния 3
 		// проверка слияния
 		// User 1(Username: user, password: user)
 		// User 2(Username: admin, password: admin)
