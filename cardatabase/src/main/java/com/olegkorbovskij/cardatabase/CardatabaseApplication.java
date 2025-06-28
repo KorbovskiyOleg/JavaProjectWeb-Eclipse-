@@ -55,7 +55,6 @@ public class CardatabaseApplication implements CommandLineRunner {
 		for (Car car : repository.findByBrandAndModel("Ford", "Mustang")) {
 			logger.info(car.getBrand() + " " + car.getModel() + " " + car.getId());
 		}
-		// repository.deleteAll();
 
 		// User 1(Username: user, password: user)
 		// User 2(Username: admin, password: admin)
