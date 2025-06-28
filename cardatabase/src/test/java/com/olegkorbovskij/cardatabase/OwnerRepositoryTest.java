@@ -23,5 +23,12 @@ public class OwnerRepositoryTest {
 	      ("Lucy").isPresent())
 	    .isTrue();
 	 }
+	 
+	 @Test
+	 void deleteOwners() {
+	  repository.save(new Owner("Lisa", "Morrison"));
+	  repository.deleteAll();
+	  assertThat(repository.count()).isEqualTo(0);
+	 }
 
 }
