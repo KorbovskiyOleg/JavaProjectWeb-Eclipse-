@@ -45,7 +45,8 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-				.csrf(csrf -> csrf.disable()).cors(Customizer.withDefaults())
+				.csrf(csrf -> csrf.disable())
+				/*.cors(Customizer.withDefaults())
 				.sessionManagement(session -> session
 						.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				)
@@ -54,7 +55,11 @@ public class SecurityConfig {
 						.anyRequest().authenticated())
 				.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.exceptionHandling((exceptionHandling) -> exceptionHandling.authenticationEntryPoint(exceptionHandler));
-
+				*/
+				.cors(Customizer.withDefaults())
+	            .authorizeHttpRequests(auth -> auth
+	                .anyRequest().permitAll()  // Разрешаем все запросы
+	            );
 		return http.build();
 	}
 
@@ -78,7 +83,7 @@ public class SecurityConfig {
 		config.setAllowedMethods(Arrays.asList("*"));
 		config.setAllowedHeaders(Arrays.asList("*"));
 		config.setAllowCredentials(false);
-		config.applyPermitDefaultValues();
+		//config.applyPermitDefaultValues();
 		source.registerCorsConfiguration("/**", config);
 		return source;
 	}
