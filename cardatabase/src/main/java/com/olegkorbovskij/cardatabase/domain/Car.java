@@ -16,7 +16,7 @@ public class Car {
 	private long id;
 
 	private String brand, model, color, registerNumber;
-	private int yearOfCar, price;
+	private int make, price;
 
 	public Car() {
 	}
@@ -32,22 +32,14 @@ public class Car {
 	@JoinColumn(name = "owner")
 	private Owner owner;
 
-	public Car(String brand, String model, String color, String registerNumber, int yearOfCar, int price, Owner owner) {
+	public Car(String brand, String model, String color, String registerNumber, int make, int price, Owner owner) {
 		super();
 		this.brand = brand;
 		this.model = model;
 		this.color = color;
 		this.registerNumber = registerNumber;
-		this.yearOfCar = yearOfCar;
+		this.make = make;
 		this.price = price;
-		this.owner = owner;
-	}
-
-	public Owner getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
 
@@ -91,12 +83,12 @@ public class Car {
 		this.registerNumber = registerNumber;
 	}
 
-	public int getYearOfCar() {
-		return yearOfCar;
+	public int getMake() {
+		return make;
 	}
 
-	public void setYearOfCar(int yearOfCar) {
-		this.yearOfCar = yearOfCar;
+	public void setMake(int make) {
+		this.make = make;
 	}
 
 	public int getPrice() {
@@ -105,6 +97,14 @@ public class Car {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 
 }
