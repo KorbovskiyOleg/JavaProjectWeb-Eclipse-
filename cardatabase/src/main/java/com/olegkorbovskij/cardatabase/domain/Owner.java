@@ -22,13 +22,15 @@ public class Owner {
 	private String firstName;
 	private String lastName;
 	
-	private int phone;
+	
+	private Integer phone;
+	
 	private String email;
 
 	public Owner() {
 	}
 
-	public Owner(String firstName, String lastName, int phone, String email) {
+	public Owner(String firstName, String lastName, Integer phone, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
