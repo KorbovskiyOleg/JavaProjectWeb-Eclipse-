@@ -24,14 +24,14 @@ public class Owner {
 	private String lastName;
 	
 	@Column(nullable = true)
-	private Integer phone;
+	private Long phone;
 	
 	private String email;
 
 	public Owner() {
 	}
 
-	public Owner(String firstName, String lastName, Integer phone, String email) {
+	public Owner(String firstName, String lastName, Long phone, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -55,11 +55,11 @@ public class Owner {
 		return ownerId;
 	}
 
-	public Integer getPhone() {
+	public Long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(Long phone) {
 		this.phone = phone;
 	}
 
