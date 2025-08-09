@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class Owner {
 	private String firstName;
 	private String lastName;
 	
-	
+	@Column(nullable = true)
 	private Integer phone;
 	
 	private String email;
@@ -54,11 +55,11 @@ public class Owner {
 		return ownerId;
 	}
 
-	public int getPhone() {
+	public Integer getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
 
