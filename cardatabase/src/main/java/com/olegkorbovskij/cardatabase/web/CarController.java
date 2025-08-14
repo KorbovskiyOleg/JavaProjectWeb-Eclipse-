@@ -17,5 +17,4 @@ public class CarController {
 	public Iterable<Car> getCars() {
 		return repository.findAll();
 	}
-
 }
