@@ -30,21 +30,29 @@ public class Owner {
 	
 	//@Column(nullable = true)
 	private String phone;
-	
 	private String email;
+	private String address;
 
 	public Owner() {
 	}
 
-	public Owner(String firstName, String lastName, String phone, String email) {
+	public Owner(String firstName, String lastName, String phone, String email, String address) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.email = email;
-	}
+		this.address = address;	}
 
 	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private List<Car> cars;
 
