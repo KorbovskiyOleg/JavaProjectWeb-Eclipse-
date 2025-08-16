@@ -20,7 +20,7 @@ public class OwnerRepositoryTest {
 	 @Test
 	 @DisplayName("Two example test case")
 	 void saveOwner() {
-	  orepository.save(new Owner("Lucy", "Smith", "422313131", "sdsc@dwdww"));
+	  orepository.save(new Owner("Lucy", "Smith", "422313131", "sdsc@dwdww", "Russia, Podolsk, Chaikovsky street, 6/32"));
 	  assertThat(orepository.findByFirstName
 	      ("Lucy").isPresent())
 	    .isTrue();
@@ -29,7 +29,7 @@ public class OwnerRepositoryTest {
 	 @Test
 	 @DisplayName("Three example test case")
 	 void deleteOwners() {
-	  orepository.save(new Owner("Lisa", "Morrison", "234312112", "add@dwdqqq"));
+	  orepository.save(new Owner("Lisa", "Morrison", "234312112", "add@dwdqqq", "Russia, Podolsk, Chaikovsky street, 6/32"));
 	  orepository.deleteAll();
 	  assertThat(orepository.count()).isEqualTo(0);
 	 }
