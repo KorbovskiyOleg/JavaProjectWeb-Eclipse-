@@ -6,8 +6,8 @@ public class CarDTO{
     private String color;
     private int make;
     private int price;
-    private String ownerName;  // Имя владельца
-    private String ownerSurname; // Фамилия влыдельца
+    private String firstName;  // Имя владельца
+    private String lastName; // Фамилия влыдельца
     
     
 	public String getBrand() {
@@ -40,18 +40,19 @@ public class CarDTO{
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getOwnerName() {
-		return ownerName;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getOwnerSurname() {
-		return ownerSurname;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setOwnerSurname(String ownerSurname) {
-		this.ownerSurname = ownerSurname;
-	} 
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
 	
     
 	
