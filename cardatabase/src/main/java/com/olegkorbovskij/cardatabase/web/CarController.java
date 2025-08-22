@@ -1,6 +1,7 @@
 package com.olegkorbovskij.cardatabase.web;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import com.olegkorbovskij.cardatabase.domain.Car;
 import com.olegkorbovskij.cardatabase.domain.CarRepository;
 //import com.olegkorbovskij.cardatabase.domain.CarRepository;
 import com.olegkorbovskij.cardatabase.dto.CarDTO;
+import com.olegkorbovskij.cardatabase.dto.CarResponseDTO;
 import com.olegkorbovskij.cardatabase.service.CarService;
 
 import jakarta.transaction.Transactional;
@@ -39,17 +41,26 @@ public class CarController {
 	
 	@GetMapping("/cars")
 	@Transactional // ← ВАЖНО: добавляем транзакцию!
-	public Iterable<Car> getCars() {
-	    List<Car> cars = (List<Car>) repository.findAll();
-	    
-	    // Принудительно загружаем владельцев
-	    for (Car car : cars) {
-	        if (car.getOwner() != null) {
-	            // Загружаем данные владельца
-	            car.getOwner().getFirstName();
-	            car.getOwner().getLastName();
-	        }
-	    }
-	    
-	    return cars;
+	public List<CarResponseDTO> getCars() {
+	    return ((List<Car>) repository.findAll()).stream()
+	        .map(car -> {
+	            CarResponseDTO dto = new CarResponseDTO();
+	            dto.setId(car.getId());
+	            dto.setBrand(car.getBrand());
+	            dto.setModel(car.getModel());
+	            dto.setColor(car.getColor());
+	            dto.setMake(car.getMake());
+	            dto.setPrice(car.getPrice());
+	           
+	            
+	            // Добавляем данные владельца
+	            if (car.getOwner() != null) {
+	                dto.setOwnerId(car.getOwner().getOwnerId());
+	                dto.setOwnerFirstName(car.getOwner().getFirstName());
+	                dto.setOwnerLastName(car.getOwner().getLastName());
+	            }
+	            
+	            return dto;
+	        })
+	        .collect(Collectors.toList());
 }}
