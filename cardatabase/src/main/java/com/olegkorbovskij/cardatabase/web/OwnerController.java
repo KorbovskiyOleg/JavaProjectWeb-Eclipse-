@@ -13,7 +13,7 @@ public class OwnerController {
 	@Autowired
 	private OwnerRepository repository;
 	
-	@RequestMapping("/owners")
+	@RequestMapping("api/owners")
 	public Iterable<Owner> getOwner() {
 		return repository.findAll();
 	}
