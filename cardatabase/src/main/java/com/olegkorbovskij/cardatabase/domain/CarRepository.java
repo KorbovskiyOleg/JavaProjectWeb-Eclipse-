@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
-@RepositoryRestResource
+//@RepositoryRestResource
 public interface CarRepository extends CrudRepository<Car, Long> {
 	// Получить авто по бренду
 	List<Car> findByBrand(@Param("brand")String brand);

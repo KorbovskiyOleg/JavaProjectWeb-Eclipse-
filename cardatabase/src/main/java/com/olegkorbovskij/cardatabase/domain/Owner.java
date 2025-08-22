@@ -2,6 +2,9 @@ package com.olegkorbovskij.cardatabase.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -13,7 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Owner {
 
 	public Owner(String firstName, String lastName) {
@@ -54,6 +57,7 @@ public class Owner {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	@JsonIgnore 
 	private List<Car> cars;
 
 	public List<Car> getCars() {
