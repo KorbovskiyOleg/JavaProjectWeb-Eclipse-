@@ -19,7 +19,7 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	List<Car> findByColor(@Param("color") String color);
 	
 	// Получить авто по ID владельца - ИСПРАВЛЕННЫЙ МЕТОД
-    @Query("SELECT c FROM Car c WHERE c.owner.ownerid = :ownerId")
+    @Query("SELECT c FROM Car c WHERE c.owner.ownerId = :ownerId")
     List<Car> findByOwnerId(@Param("ownerId") Long ownerId);
 	
 	

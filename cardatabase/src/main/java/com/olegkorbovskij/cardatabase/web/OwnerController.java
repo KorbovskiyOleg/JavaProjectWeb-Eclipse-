@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.olegkorbovskij.cardatabase.domain.Owner;
 import com.olegkorbovskij.cardatabase.domain.OwnerRepository;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/api")
 public class OwnerController {
@@ -25,6 +27,7 @@ public class OwnerController {
 	}
 	
 	@GetMapping("/owners/{id}") // ← Добавьте этот метод
+	@Transactional 
     public ResponseEntity<Owner> getOwnerById(@PathVariable Long id) {
         Optional<Owner> owner = repository.findById(id);
         return owner.map(ResponseEntity::ok)

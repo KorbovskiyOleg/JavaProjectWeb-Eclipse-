@@ -20,67 +20,11 @@ import com.olegkorbovskij.cardatabase.service.CarService;
 
 import jakarta.transaction.Transactional;
 
-/*@RestController
-@RequestMapping("/api")
-public class CarController {
-	
-	@Autowired
-    private CarService carService;
-
-    @PostMapping("/cars")
-    public ResponseEntity<Car> addCar(@RequestBody CarDTO carDTO) {
-        Car savedCar = carService.addCar(carDTO);
-        return ResponseEntity.ok(savedCar);
-    }
-	
-	
-	
-	
-	@Autowired
-	private CarRepository repository;
-	
-	@GetMapping("/cars")
-	@Transactional // ← ВАЖНО: добавляем транзакцию!
-	public List<CarResponseDTO> getCars() {
-	    return ((List<Car>) repository.findAll()).stream()
-	        .map(car -> {
-	            CarResponseDTO dto = new CarResponseDTO();
-	            dto.setId(car.getId());
-	            dto.setBrand(car.getBrand());
-	            dto.setModel(car.getModel());
-	            dto.setColor(car.getColor());
-	            dto.setMake(car.getMake());
-	            dto.setPrice(car.getPrice());
-	           
-	            
-	            // Добавляем данные владельца
-	            if (car.getOwner() != null) {
-	                dto.setOwnerId(car.getOwner().getOwnerId());
-	                dto.setOwnerFirstName(car.getOwner().getFirstName());
-	                dto.setOwnerLastName(car.getOwner().getLastName());
-	            }
-	            
-	            return dto;
-	        })
-	        .collect(Collectors.toList());
-	}
-	    
-	    @GetMapping("/cars/owner/{ownerId}")
-	    @Transactional
-	    public ResponseEntity<List<Car>> getCarsByOwner(@RequestParam(required = false) Long ownerId) {
-	        if (ownerId != null) {
-	            // Возвращаем автомобили конкретного владельца
-	            return ResponseEntity.ok(repository.findByOwnerId(ownerId));
-	        }
-	        // Возвращаем все автомобили
-	        return ResponseEntity.ok((List<Car>) repository.findAll());
-	    }
-}*/
 
 @RestController
 @RequestMapping("/api")
 public class CarController {
-    
+
     @Autowired
     private CarService carService;
 
@@ -92,15 +36,35 @@ public class CarController {
         Car savedCar = carService.addCar(carDTO);
         return ResponseEntity.ok(savedCar);
     }
-    
+
     @GetMapping("/cars")
     @Transactional
     public ResponseEntity<?> getCars(@RequestParam(required = false) Long ownerId) {
         if (ownerId != null) {
-            // Возвращаем автомобили конкретного владельца
-            return ResponseEntity.ok(repository.findByOwnerId(ownerId));
+            // ВОТ ИСПРАВЛЕНИЕ: Возвращаем автомобили конкретного владельца, преобразованные в DTO
+            List<CarResponseDTO> cars = repository.findByOwnerId(ownerId).stream() // <- Теперь работаем с результатом репозитория
+                .map(car -> {
+                    CarResponseDTO dto = new CarResponseDTO();
+                    dto.setId(car.getId());
+                    dto.setBrand(car.getBrand());
+                    dto.setModel(car.getModel());
+                    dto.setColor(car.getColor());
+                    dto.setMake(car.getMake());
+                    dto.setPrice(car.getPrice());
+                    
+                    // Важно! Данные владельца загружаются здесь, внутри транзакции
+                    if (car.getOwner() != null) {
+                        dto.setOwnerId(car.getOwner().getOwnerId());
+                        dto.setOwnerFirstName(car.getOwner().getFirstName());
+                        dto.setOwnerLastName(car.getOwner().getLastName());
+                    }
+                    
+                    return dto;
+                })
+                .collect(Collectors.toList());
+            return ResponseEntity.ok(cars); // <- Возвращаем List<CarResponseDTO>, а не List<Car>
         }
-        // Возвращаем все автомобили с DTO
+        // Возвращаем все автомобили с DTO (код остается без изменений)
         List<CarResponseDTO> cars = ((List<Car>) repository.findAll()).stream()
             .map(car -> {
                 CarResponseDTO dto = new CarResponseDTO();
@@ -112,7 +76,7 @@ public class CarController {
                 dto.setPrice(car.getPrice());
                 
                 if (car.getOwner() != null) {
-                    dto.setOwnerId(car.getOwner().getOwnerId()); // ← Убедитесь что getOwnerId() существует!
+                    dto.setOwnerId(car.getOwner().getOwnerId());
                     dto.setOwnerFirstName(car.getOwner().getFirstName());
                     dto.setOwnerLastName(car.getOwner().getLastName());
                 }
