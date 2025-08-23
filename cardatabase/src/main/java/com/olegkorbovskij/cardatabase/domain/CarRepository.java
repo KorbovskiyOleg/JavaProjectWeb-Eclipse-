@@ -2,9 +2,10 @@ package com.olegkorbovskij.cardatabase.domain;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+//import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
 //@RepositoryRestResource
@@ -16,5 +17,10 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	List<Car> findByBrandAndModel(@Param("brand")String brand, @Param("model") String model);
 	
 	List<Car> findByColor(@Param("color") String color);
-
+	
+	// Получить авто по ID владельца - ИСПРАВЛЕННЫЙ МЕТОД
+    @Query("SELECT c FROM Car c WHERE c.owner.ownerid = :ownerId")
+    List<Car> findByOwnerId(@Param("ownerId") Long ownerId);
+	
+	
 }
