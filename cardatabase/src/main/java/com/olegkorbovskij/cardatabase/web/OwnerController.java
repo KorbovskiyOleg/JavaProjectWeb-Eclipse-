@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.olegkorbovskij.cardatabase.domain.Owner;
 import com.olegkorbovskij.cardatabase.domain.OwnerRepository;
+import com.olegkorbovskij.cardatabase.service.OwnerService;
 
 import jakarta.transaction.Transactional;
 
@@ -24,6 +25,9 @@ public class OwnerController {
 	
 	@Autowired
 	private OwnerRepository repository;
+	
+	@Autowired
+	private OwnerService ownerService;
 	
 	@GetMapping("/owners")
 	public Iterable<Owner> getOwner() {
@@ -39,45 +43,17 @@ public class OwnerController {
     }
 	
 	// Метод для обновления владельца (PUT)
-    @PutMapping("/owners/{id}")
+	@PutMapping("/owners/{id}")
     public ResponseEntity<?> updateOwner(@PathVariable Long id, @RequestBody Owner ownerDetails) {
         try {
-            // 1. Находим существующего владельца по ID
-            Optional<Owner> optionalOwner = repository.findById(id);
-            
-            if (optionalOwner.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Владелец с ID " + id + " не найден");
-            }
-            
-            Owner existingOwner = optionalOwner.get();
-            
-            // 2. Обновляем только те поля, которые пришли в запросе
-            if (ownerDetails.getFirstName() != null) {
-                existingOwner.setFirstName(ownerDetails.getFirstName());
-            }
-            if (ownerDetails.getLastName() != null) {
-                existingOwner.setLastName(ownerDetails.getLastName());
-            }
-            if (ownerDetails.getEmail() != null) {
-                existingOwner.setEmail(ownerDetails.getEmail());
-            }
-            if (ownerDetails.getPhone() != null) {
-                existingOwner.setPhone(ownerDetails.getPhone());
-            }
-            if (ownerDetails.getAddress() != null) {
-                existingOwner.setAddress(ownerDetails.getAddress());
-            }
-            
-            // 3. Сохраняем обновленного владельца
-            Owner updatedOwner = repository.save(existingOwner);
-            
-            // 4. Возвращаем обновленного владельца
+            Owner updatedOwner = ownerService.updateOwner(id, ownerDetails);
             return ResponseEntity.ok(updatedOwner);
-            
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Ошибка при обновлении владельца: " + e.getMessage());
+                    .body("Ошибка при обновлении владельца: " + e.getMessage());
         }
     }
 	
