@@ -10,7 +10,7 @@ public interface OwnerRepository extends CrudRepository<Owner, Long> {
 	
 	 Optional<Owner> findByFirstName(String firstName);
 
-	 Optional<Owner> findByFirstNameAndLastName(String firstName, String lastName);;
+	 Optional<Owner> findByFirstNameAndLastName(String firstName, String lastName);
 
 }
 
